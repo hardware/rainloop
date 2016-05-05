@@ -5,6 +5,8 @@ addgroup -g ${GID} rainloop && adduser -h /rainloop -s /bin/sh -D -G rainloop -u
 
 # Set permissions
 chown -R rainloop:rainloop /rainloop /var/run/php-fpm.sock /var/lib/nginx /tmp
+find /rainloop -type d -exec chmod 755 {} \;
+find /rainloop -type f -exec chmod 644 {} \;
 
 # RUN !
 supervisord -c /etc/supervisor/supervisord.conf
