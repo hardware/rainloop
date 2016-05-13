@@ -2,17 +2,11 @@
 
 ![](https://i.goopics.net/nI.png)
 
-Rainloop is a SIMPLE, MODERN & FAST WEB-BASED EMAIL CLIENT. More details on the [official website](http://www.rainloop.net/).
-
-### Requirement
-
-- Docker 1.0 or higher
-- MySQL (Optional, for contacts database)
+Rainloop is a simple, modern & fast web-based client. More details on the [official website](http://www.rainloop.net/).
 
 ### Features
 - Based on Alpine 3.3
 - Latest Rainloop **Community Edition** (stable)
-- Extremely lightweight
 - Contacts (DB) : sqlite, or mysql (server not built-in)
 
 ### How to use
@@ -24,6 +18,18 @@ docker run -d \
   -v /mnt/docker/rainloop:/rainloop/data \
   hardware/rainloop
 ```
+
+### Reverse proxy example with nginx
+
+https://github.com/hardware/mailserver/wiki/Reverse-proxy-configuration
+
+### Initial configuration
+
+https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
+
+#### Build-time variables
+
+- **GPG_rainloop** : fingerprint of signing key
 
 ### Environment variables
 
@@ -39,9 +45,6 @@ rainloop:
   container_name: rainloop
   links:
     - mariadb:mariadb
-  environment:
-    - GID=991
-    - UID=991
   volumes:
     - /mnt/docker/rainloop:/rainloop/data
 
@@ -64,11 +67,3 @@ mariadb:
 ```
 docker-compose up -d
 ```
-
-### Reverse proxy example with nginx
-
-https://github.com/hardware/mailserver/wiki/Reverse-proxy-configuration
-
-### Initial configuration
-
-https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
