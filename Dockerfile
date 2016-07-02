@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.4
 MAINTAINER Wonderfall <wonderfall@mondedie.fr>
 MAINTAINER Hardware <contact@meshup.net>
 
@@ -6,8 +6,8 @@ ARG GPG_rainloop="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
 ENV GID=991 UID=991
 
-RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
- && echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+ && echo "@testing https://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
  && apk -U add \
     gnupg \
     nginx \
@@ -39,7 +39,7 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
  && find /rainloop -type d -exec chmod 755 {} \; \
  && find /rainloop -type f -exec chmod 644 {} \; \
  && apk del gnupg \
- && rm -rf /tmp/* /var/cache/apk/*
+ && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
