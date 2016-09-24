@@ -1,17 +1,17 @@
 FROM alpine:3.4
-MAINTAINER Wonderfall <wonderfall@mondedie.fr>
+MAINTAINER Wonderfall <wonderfall@schrodinger.io>
 MAINTAINER Hardware <contact@meshup.net>
 
-ARG GPG_rainloop="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
+ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
-ENV GID=991 UID=991
+ENV UID=991 GID=991
 
 RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
  && apk -U add \
     gnupg \
     nginx \
-    supervisor \
-    tini@commuedge \
+    s6 \
+    su-exec \
     php7-fpm@commuedge \
     php7-curl@commuedge \
     php7-iconv@commuedge \
@@ -32,7 +32,7 @@ RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/a
  && FINGERPRINT="$(LANG=C gpg --verify rainloop-community-latest.zip.asc rainloop-community-latest.zip 2>&1 \
   | sed -n "s#Primary key fingerprint: \(.*\)#\1#p")" \
  && if [ -z "${FINGERPRINT}" ]; then echo "Warning! Invalid GPG signature!" && exit 1; fi \
- && if [ "${FINGERPRINT}" != "${GPG_rainloop}" ]; then echo "Warning! Wrong GPG fingerprint!" && exit 1; fi \
+ && if [ "${FINGERPRINT}" != "${GPG_FINGERPRINT}" ]; then echo "Warning! Wrong GPG fingerprint!" && exit 1; fi \
  && echo "All seems good, now unzipping rainloop-community-latest.zip..." \
  && mkdir /rainloop && unzip -q /tmp/rainloop-community-latest.zip -d /rainloop \
  && find /rainloop -type d -exec chmod 755 {} \; \
@@ -42,11 +42,13 @@ RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/a
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-COPY startup /usr/local/bin/startup
+COPY s6.d /etc/s6.d
+COPY run.sh /usr/local/bin/run.sh
 
-RUN chmod +x /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/run.sh /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
 VOLUME /rainloop/data
-EXPOSE 80
-CMD ["/sbin/tini","--","startup"]
+
+EXPOSE 8888
+
+CMD ["run.sh"]

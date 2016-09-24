@@ -2,22 +2,32 @@
 
 ![](https://i.goopics.net/nI.png)
 
+### What is this ?
+
 Rainloop is a simple, modern & fast web-based client. More details on the [official website](http://www.rainloop.net/).
 
 ### Features
-- Based on Alpine 3.3
+
+- Lightweight & secure image (no root process)
+- Based on Alpine 3.4
 - Latest Rainloop **Community Edition** (stable)
 - Contacts (DB) : sqlite, or mysql (server not built-in)
+- With Nginx and PHP7
 
-### How to use
+### Build-time variables
 
-```
-docker run -d \
-  --name rainloop \
-  --link mariadb:mariadb \ # Optional
-  -v /mnt/docker/rainloop:/rainloop/data \
-  hardware/rainloop
-```
+- **GPG_FINGERPRINT** : fingerprint of signing key
+
+### Ports
+
+- **8888**
+
+### Environment variables
+
+| Variable | Description | Type | Default value |
+| -------- | ----------- | ---- | ------------- |
+| **GID** | rainloop user id | *optional* | 991
+| **UID** | rainloop group id | *optional* | 991
 
 ### Reverse proxy example with nginx
 
@@ -26,15 +36,6 @@ https://github.com/hardware/mailserver/wiki/Reverse-proxy-configuration
 ### Initial configuration
 
 https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
-
-#### Build-time variables
-
-- **GPG_rainloop** : fingerprint of signing key
-
-### Environment variables
-
-- **UID** : rainloop user id (*optional*, default: 991)
-- **GID** : rainloop group id (*optional*, default: 991)
 
 ### Docker-compose
 
@@ -48,7 +49,7 @@ rainloop:
   volumes:
     - /mnt/docker/rainloop:/rainloop/data
 
-# if using mysql as contacts database :
+# if using mariadb as contacts database :
 
 mariadb:
   image: mariadb:10.1
