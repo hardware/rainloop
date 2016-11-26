@@ -1,5 +1,3 @@
-:warning: **24/09/2016** : Rainloop reverse proxy port have changed, it's now **8888**. Please, update your nginx vhost file before pulling the latest image from dockerhub. For more information : https://github.com/hardware/mailserver/wiki/Reverse-proxy-configuration
-
 # hardware/rainloop
 
 ![](https://i.goopics.net/nI.png)
