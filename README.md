@@ -9,7 +9,7 @@ Rainloop is a simple, modern & fast web-based client. More details on the [offic
 ### Features
 
 - Lightweight & secure image (no root process)
-- Based on Alpine 3.4
+- Based on Alpine
 - Latest Rainloop **Community Edition** (stable)
 - Contacts (DB) : sqlite, or mysql (server not built-in)
 - With Nginx and PHP7
@@ -26,8 +26,8 @@ Rainloop is a simple, modern & fast web-based client. More details on the [offic
 
 | Variable | Description | Type | Default value |
 | -------- | ----------- | ---- | ------------- |
-| **GID** | rainloop user id | *optional* | 991
-| **UID** | rainloop group id | *optional* | 991
+| **UID** | rainloop user id | *optional* | 991
+| **GID** | rainloop group id | *optional* | 991
 
 ### Reverse proxy example with nginx
 
