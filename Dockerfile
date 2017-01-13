@@ -23,6 +23,7 @@ RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/a
     php7-pdo_mysql@commuedge \
     php7-pdo_sqlite@commuedge \
     php7-sqlite3@commuedge \
+    php7-ldap@commuedge \
  && cd /tmp \
  && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip \
  && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip.asc \
