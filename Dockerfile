@@ -1,29 +1,30 @@
-FROM alpine:edge
-MAINTAINER Wonderfall <wonderfall@schrodinger.io>
-MAINTAINER Hardware <contact@meshup.net>
+FROM alpine:3.5
+
+LABEL description "Rainloop is a simple, modern & fast web-based client" \
+      maintainer="Hardware <contact@meshup.net>"
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
 ENV UID=991 GID=991
 
-RUN echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/apk/repositories \
  && apk -U add \
     gnupg \
     nginx \
     s6 \
     su-exec \
-    php7-fpm@commuedge \
-    php7-curl@commuedge \
-    php7-iconv@commuedge \
-    php7-xml@commuedge \
-    php7-dom@commuedge \
-    php7-openssl@commuedge \
-    php7-json@commuedge \
-    php7-zlib@commuedge \
-    php7-pdo_mysql@commuedge \
-    php7-pdo_sqlite@commuedge \
-    php7-sqlite3@commuedge \
-    php7-ldap@commuedge \
+    php7-fpm@community \
+    php7-curl@community \
+    php7-iconv@community \
+    php7-xml@community \
+    php7-dom@community \
+    php7-openssl@community \
+    php7-json@community \
+    php7-zlib@community \
+    php7-pdo_mysql@community \
+    php7-pdo_sqlite@community \
+    php7-sqlite3@community \
+    php7-ldap@community \
  && cd /tmp \
  && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip \
  && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip.asc \
