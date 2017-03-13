@@ -26,9 +26,9 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
     php7-sqlite3@community \
     php7-ldap@community \
  && cd /tmp \
- && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip \
- && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip.asc \
- && wget -q http://repository.rainloop.net/RainLoop.asc \
+ && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip \
+ && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip.asc \
+ && wget -q https://www.rainloop.net/repository/RainLoop.asc \
  && echo "Verifying authenticity of rainloop-community-latest.zip using GPG..." \
  && gpg --import RainLoop.asc \
  && FINGERPRINT="$(LANG=C gpg --verify rainloop-community-latest.zip.asc rainloop-community-latest.zip 2>&1 \
