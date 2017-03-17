@@ -8,8 +8,13 @@ ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 ENV UID=991 GID=991
 
 RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/apk/repositories \
- && apk -U add \
+ && BUILD_DEPS=" \
     gnupg \
+    openssl \
+    wget" \
+ && apk --no-cache -U add \
+    ${BUILD_DEPS} \
+    ca-certificates \
     nginx \
     s6 \
     su-exec \
@@ -26,9 +31,9 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
     php7-sqlite3@community \
     php7-ldap@community \
  && cd /tmp \
- && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip \
- && wget -q http://repository.rainloop.net/v2/webmail/rainloop-community-latest.zip.asc \
- && wget -q http://repository.rainloop.net/RainLoop.asc \
+ && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip \
+ && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip.asc \
+ && wget -q https://www.rainloop.net/repository/RainLoop.asc \
  && echo "Verifying authenticity of rainloop-community-latest.zip using GPG..." \
  && gpg --import RainLoop.asc \
  && FINGERPRINT="$(LANG=C gpg --verify rainloop-community-latest.zip.asc rainloop-community-latest.zip 2>&1 \
@@ -39,7 +44,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
  && mkdir /rainloop && unzip -q /tmp/rainloop-community-latest.zip -d /rainloop \
  && find /rainloop -type d -exec chmod 755 {} \; \
  && find /rainloop -type f -exec chmod 644 {} \; \
- && apk del gnupg \
+ && apk del ${BUILD_DEPS} \
  && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
 
 COPY nginx.conf /etc/nginx/nginx.conf
