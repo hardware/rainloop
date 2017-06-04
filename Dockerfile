@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 LABEL description "Rainloop is a simple, modern & fast web-based client" \
       maintainer="Hardware <contact@meshup.net>"
@@ -7,13 +7,13 @@ ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
 ENV UID=991 GID=991
 
-RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/apk/repositories \
- && BUILD_DEPS=" \
+RUN echo "@community https://nl.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories \
+ && apk -U upgrade \
+ && apk add -t build-dependencies \
     gnupg \
     openssl \
-    wget" \
- && apk --no-cache -U add \
-    ${BUILD_DEPS} \
+    wget \
+ && apk add \
     ca-certificates \
     nginx \
     s6 \
@@ -44,7 +44,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
  && mkdir /rainloop && unzip -q /tmp/rainloop-community-latest.zip -d /rainloop \
  && find /rainloop -type d -exec chmod 755 {} \; \
  && find /rainloop -type f -exec chmod 644 {} \; \
- && apk del ${BUILD_DEPS} \
+ && apk del build-dependencies \
  && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
 
 COPY nginx.conf /etc/nginx/nginx.conf
