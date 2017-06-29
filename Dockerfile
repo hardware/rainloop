@@ -30,6 +30,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.6/community" >> /etc/a
     php7-pdo_sqlite@community \
     php7-sqlite3@community \
     php7-ldap@community \
+    php7-simplexml@community \
  && cd /tmp \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip.asc \
