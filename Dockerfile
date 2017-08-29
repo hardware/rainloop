@@ -1,36 +1,17 @@
-FROM alpine:3.6
+FROM wonderfall/nginx-php:7.1
 
 LABEL description "Rainloop is a simple, modern & fast web-based client" \
       maintainer="Hardware <contact@meshup.net>"
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
-ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M
+ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M MEMORY_LIMIT=128M
 
-RUN echo "@community https://nl.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories \
- && apk -U upgrade \
+RUN apk -U upgrade \
  && apk add -t build-dependencies \
     gnupg \
     openssl \
     wget \
- && apk add \
-    ca-certificates \
-    nginx \
-    s6 \
-    su-exec \
-    php7-fpm@community \
-    php7-curl@community \
-    php7-iconv@community \
-    php7-xml@community \
-    php7-dom@community \
-    php7-openssl@community \
-    php7-json@community \
-    php7-zlib@community \
-    php7-pdo_mysql@community \
-    php7-pdo_sqlite@community \
-    php7-sqlite3@community \
-    php7-ldap@community \
-    php7-simplexml@community \
  && cd /tmp \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip.asc \
@@ -47,7 +28,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.6/community" >> /etc/a
  && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
 
 COPY rootfs /
-RUN chmod +x /usr/local/bin/run.sh /services/*/run /services/.s6-svscan/*
+RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 VOLUME /rainloop/data
 EXPOSE 8888
 CMD ["run.sh"]
