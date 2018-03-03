@@ -9,6 +9,7 @@ if [ -d "/rainloop/data/_data_/_default_/plugins/postfixadmin-change-password" ]
 fi
 
 # Add postfixadmin-change-password plugin
+mkdir -p /rainloop/data/_data_/_default_/plugins/
 cp -r /usr/local/include/postfixadmin-change-password /rainloop/data/_data_/_default_/plugins/
 
 # Fix permissions
