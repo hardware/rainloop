@@ -26,6 +26,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.7/community" >> /etc/a
     php7-openssl@community \
     php7-json@community \
     php7-zlib@community \
+    php7-pdo_pgsql@community \
     php7-pdo_mysql@community \
     php7-pdo_sqlite@community \
     php7-sqlite3@community \

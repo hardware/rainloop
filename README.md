@@ -11,7 +11,7 @@ Rainloop is a simple, modern & fast web-based client. More details on the [offic
 - Lightweight & secure image (no root process)
 - Based on Alpine
 - Latest Rainloop **Community Edition** (stable)
-- Contacts (DB) : sqlite, or mysql (server not built-in)
+- Contacts (DB) : sqlite, mysql or pgsql (server not built-in)
 - With Nginx and PHP7
 - Postfixadmin-change-password plugin
 
