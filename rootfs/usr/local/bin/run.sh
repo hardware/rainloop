@@ -8,6 +8,13 @@ if [ -d "/rainloop/data/_data_/_default_/plugins/postfixadmin-change-password" ]
   rm -rf /rainloop/data/_data_/_default_/plugins/postfixadmin-change-password
 fi
 
+# Set log output to STDOUT if wanted (LOG_TO_STDOUT=true)
+if [ "$LOG_TO_STDOUT" == "true" ]; then
+  chmod o+w /dev/stdout
+  sed -i "s/.*error_log.*$/error_log \/dev\/stdout warn;/" /etc/nginx/nginx.conf
+  echo "Logging to STDOUT activated" > /dev/stdout
+fi
+
 # Add postfixadmin-change-password plugin
 mkdir -p /rainloop/data/_data_/_default_/plugins/
 cp -r /usr/local/include/postfixadmin-change-password /rainloop/data/_data_/_default_/plugins/
