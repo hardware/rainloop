@@ -11,7 +11,7 @@ fi
 # Set log output to STDOUT if wanted (LOG_TO_STDOUT=true)
 if [ "$LOG_TO_STDOUT" == "true" ]; then
   chmod o+w /dev/stdout
-  sed -i "s/.*error_log.*$/error_log /dev/stdout warn;/"
+  sed -i "s/.*error_log.*$/error_log \/dev\/stdout warn;/"
   echo "Logging to STDOUT activated" > /dev/stdout
 fi
 
