@@ -30,6 +30,7 @@ Rainloop is a simple, modern & fast web-based client. More details on the [offic
 | **UID** | rainloop user id | *optional* | 991
 | **GID** | rainloop group id | *optional* | 991
 | **UPLOAD_MAX_SIZE** | Attachment size limit | *optional* | 25M
+| **LOG_TO_STDOUT** | set to "true" | *optional* | undef
 
 ### Docker-compose.yml
 
