@@ -31,6 +31,7 @@ Rainloop is a simple, modern & fast web-based client. More details on the [offic
 | **GID** | rainloop group id | *optional* | 991
 | **UPLOAD_MAX_SIZE** | Attachment size limit | *optional* | 25M
 | **LOG_TO_STDOUT** | Enable nginx and php error logs to stdout | *optional* | false
+| **MEMORY_LIMIT** | PHP memory limit | *optional* | 128M
 
 ### Docker-compose.yml
 

@@ -2,6 +2,7 @@
 
 # Set attachment size limit
 sed -i "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /etc/php7/php-fpm.conf /etc/nginx/nginx.conf
+sed -i "s/<MEMORY_LIMIT>/$MEMORY_LIMIT/g" /etc/php7/php-fpm.conf
 
 # Remove postfixadmin-change-password plugin if exist
 if [ -d "/rainloop/data/_data_/_default_/plugins/postfixadmin-change-password" ]; then
